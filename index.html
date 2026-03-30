@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            padding: 0.5rem 1rem;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+        }
+
+        nav a.active {
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+        }
+
+        /* Conteneur principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Page d'accueil */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.8s;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Cards pour projets */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 0.5s;
+        }
+
+        .project-card:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .project-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .project-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .project-card h3 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+        }
+
+        /* À propos */
+        .about-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Veille technologique */
+        .veille-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+            animation: fadeIn 0.5s;
+        }
+
+        .veille-item:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .veille-item:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .veille-item:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .veille-item:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .veille-item:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        .veille-item h3 {
+            color: #764ba2;
+            margin-bottom: 0.5rem;
+        }
+
+        .veille-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .veille-item a:hover {
+            text-decoration: underline;
+        }
+
+        .veille-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Stage */
+        .stage-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            animation: fadeIn 0.5s;
+        }
+
+        .stage-info:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .stage-info h3 {
+            color: #764ba2;
+            margin-bottom: 1rem;
+        }
+
+        .stage-details {
+            margin-top: 1rem;
+        }
+
+        .stage-details p {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .stage-details p:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Contact */
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 600px;
+            animation: fadeIn 0.5s;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+            animation: fadeIn 0.5s;
+            animation-delay: 0.2s;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+        }
+
+        .contact-info a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="#" class="nav-link active" data-page="home">Accueil</a></li>
+        <li><a href="#" class="nav-link" data-page="about">À propos</a></li>
+        <li><a href="#" class="nav-link" data-page="projects">Projets</a></li>
+        <li><a href="#" class="nav-link" data-page="veille">Veille Technologique</a></li>
+        <li><a href="#" class="nav-link" data-page="stage">Stage</a></li>
+        <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+    <!-- Page Accueil -->
+    <section id="home" class="page-section active">
+        <div class="hero">
+            <h1>Bienvenue sur mon Portfolio</h1>
+            <!--<p>Jeune etudiant en BTS SIO option SLAM</p>-->
+        </div>
+        <div class="about-content">
+            <h2>Petit Introduction</h2>
+            <p>Bienvenue ! Je suis Abdallah Serrano. Je suis ravi de vous présenter mon parcours , mes projets , mes stages , ma veille technologique.
+                N'hésitez pas à explorer les différentes sections pour en savoir plus sur mon travail.</p>
+        </div>
+    </section>
+
+    <!-- Page À propos -->
+    <section id="about" class="page-section">
+        <div class="about-content">
+            <h2>À propos de moi</h2>
+            <p>Bonjour je me presente , je m'appelle abdallah serrano etudiant en bts sio option slam (Dev) . J'ai pour objectif d'obtenir mon bts pour poursuivre sur une licence en spécialisation CyberSécurité . Par la suite conclure par un master mais je ne sais pas encore lequel . </p>
+            <p>Passionné par le développement web et les nouvelles technologies, je me spécialise dans la création de solutions innovantes et performantes.</p>
+            <p>Mon parcours m'a permis d'acquérir une expérience dans divers domaines du développement garce a mes stages .</p>
+            <p>Je viens dun bac Stmg option SIg ce qui ma permis d'apprendre un peu sur le monde de l'informatique et les languages utilisé </p>
+
+            <h3 style="margin-top: 2rem; color: #764ba2;">Compétences</h3>
+            <div class="skills">
+                <span class="skill-tag">HTML5 / CSS3</span>
+                <span class="skill-tag">JavaScript</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Jira</span>
+                <span class="skill-tag">Trello</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">UX/UI Design</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Projets -->
+    <section id="projects" class="page-section">
+        <h2>Mes Projets</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Projet 1 - Projet SLAM </h3>
+                <p>Une Application codée en Java dispose d'une base de donnée et doté d'une interface.
+                    Le but est de fluidifier le trafic de train en prévenant les alertes et en proposant des itinéraires plus adaptés.
+                </p>
+                <p><strong>Technologies :</strong> IntelliJ IDEA , MySQL , PhpMyAdmin</p>
+            </div>
+
+            <div class="project-card">
+                <h3>Projet 2 - Réalisation professionnel SLAM/SISR </h3>
+                <p>Une entreprise souhaite créé une base de connaissance pour permettre aux salariès d'accéder à des tutoriels, documents techniques, procédures, et ressources internes.</p>
+                <p><strong>Technologies :</strong> JAVA , PHP, MySQL, Stripe API , Vue.js 3 , Laravel 11</p>
+            </div>
+
+            <div class="project-card">
+                <h3>Projet 3 - -</h3>
+                <p>-</p>
+                <p><strong>Technologies :</strong> -</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Veille Technologique -->
+    <section id="veille" class="page-section">
+        <h2>Veille Technologique</h2>
+
+        <div class="veille-item">
+            <h3>Cyber Attack dans un Aéroport</h3>
+            <p class="veille-date">15 septembre 2025</p>
+            <p>European airports getting back online after cyberattack</p>
+            <a href="https://www.barefootcyber.com/post/cybersecurity-weekly-update-15-22-september-2025?utm_source=chatgpt.com" target="_blank">Lire l'article</a>
+        </div>
+
+        <div class="veille-item">
+            <h3>Biggest Cyber Attacks</h3>
+            <p class="veille-date">1 octobre 2025</p>
+            <p>October 2025 was another turbulent month in the world of cybersecurity, with major organisations across industries falling victim to sophisticated breaches and disruptions</p>
+            <a href="https://www.cm-alliance.com/cybersecurity-blog/october-2025-biggest-cyber-attacks-ransomware-attacks-data-breaches?utm_source=chatgpt.com" target="_blank">Lire l'article</a>
+        </div>
+
+        <div class="veille-item">
+            <h3>Progressive Web Apps (PWA)</h3>
+            <p class="veille-date">Octobre 2024</p>
+            <p>Les PWA combinent le meilleur du web et des applications natives, offrant des expériences utilisateur optimales avec fonctionnement hors ligne et notifications push.</p>
+            <a href="URL_de_destination" target="_blank">Lire l'article</a>
+        </div>
+
+        <div class="veille-item">
+            <h3>Progressive Web Apps (PWA)</h3>
+            <p class="veille-date">Octobre 2024</p>
+            <p>Les PWA combinent le meilleur du web et des applications natives, offrant des expériences utilisateur optimales avec fonctionnement hors ligne et notifications push.</p>
+            <a href="URL_de_destination" target="_blank">Lire l'article</a>
+        </div>
+
+        <div class="veille-item">
+            <h3>Progressive Web Apps (PWA)</h3>
+            <p class="veille-date">Octobre 2024</p>
+            <p>Les PWA combinent le meilleur du web et des applications natives, offrant des expériences utilisateur optimales avec fonctionnement hors ligne et notifications push.</p>
+            <a href="URL_de_destination" target="_blank">Lire l'article</a>
+        </div>
+    </section>
+
+    <!-- Page Stage -->
+    <section id="stage" class="page-section">
+        <h2>Mon Expérience de Stage</h2>
+
+        <div class="stage-info">
+            <div class="veille-item">
+                <h3>Stage QA Test</h3>
+                <p><strong>Entreprise :</strong> Cybera France</p>
+                <p><strong>Durée :</strong> 05/01/2026 au 13/02/2026</p>
+                <p><strong>Localisation :</strong> Strasbourg ,France</p>
+
+                <div class="stage-info">
+                    <h3>Compétences acquises</h3>
+                    <div class="stage-details">
+                        <p>Travail en équipe avec méthode Agile</p>
+                        <p>Utilisation de Git pour le versioning</p>
+                        <p>Développement front-end et back-end</p>
+                        <p>Résolution de problèmes complexes</p>
+                        <p>Communication avec les clients</p>
+                    </div>
+                </div>
+
+                <div class="stage-details">
+                    <h4 style="margin-top: 1.5rem; margin-bottom: 1rem;">Missions principales :</h4>
+                    <p>Développement d'applications web responsive</p>
+                    <p>Participation à la conception de bases de données</p>
+                    <p>Collaboration avec l'équipe de développement</p>
+                    <p>Tests et débogage des applications</p>
+                    <p>Rédaction de documentation technique</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Contact -->
+    <section id="contact" class="page-section">
+        <h2>Contactez-moi</h2>
+
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Nom complet</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Sujet</label>
+                <input type="text" id="subject" name="subject" required>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+
+            <button type="submit" class="btn">Envoyer le message</button>
+        </form>
+
+        <div class="contact-info">
+            <h3> Informations de contact</h3>
+            <p><strong> Email :</strong> serrano.abdallah@gmail.com</p>
+            <p><strong> Téléphone :</strong> +33 6 95 19 17 73</p>
+            <p><strong> LinkedIn :</strong> <a href="https://www.linkedin.com/in/abdallah-serrano-679495160/" target="_blank">Linkedin.Abdallah-Serrano</a></p>
+            <p><strong> GitLab :</strong> <a href="https://gitlab.com/serrano.abdallah/SERRANO" target="_blank">GitLab.Abdallah-Serrano</a></p>
+        </div>
+    </section>
+</div>
+
+<script>
+    // Navigation entre les pages
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.page-section');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Retirer la classe active de tous les liens
+            navLinks.forEach(l => l.classList.remove('active'));
+
+            // Ajouter la classe active au lien cliqué
+            link.classList.add('active');
+
+            // Cacher toutes les sections
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Afficher la section correspondante
+            const pageId = link.getAttribute('data-page');
+            document.getElementById(pageId).classList.add('active');
+
+            // Scroll vers le haut
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+
+    // Gestion du formulaire de contact
+    function handleSubmit(event) {
+        event.preventDefault();
+        alert('Merci pour votre message ! Je vous répondrai bientôt.');
+        event.target.reset();
+    }
+</script>
+</body>
+</html>
