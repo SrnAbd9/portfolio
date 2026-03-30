@@ -144,6 +144,100 @@
             margin-bottom: 1rem;
         }
 
+        /* Certifications */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .certification-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 0.5s;
+            border-top: 4px solid #667eea;
+        }
+
+        .certification-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .cert-header h3 {
+            color: #764ba2;
+            margin: 0;
+        }
+
+        .cert-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .cert-score {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .score-badge {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-number {
+            font-size: 3rem;
+        }
+
+        .score-max {
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .cert-level {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .cert-description {
+            margin: 1rem 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .certification-card p {
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-verify-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .cert-verify-btn:hover {
+            transform: scale(1.05);
+        }
+
         /* À propos */
         .about-content {
             background: white;
@@ -258,12 +352,18 @@
         }
 
         /* Contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
         .contact-form {
             background: white;
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            max-width: 600px;
             animation: fadeIn 0.5s;
         }
 
@@ -308,6 +408,7 @@
             cursor: pointer;
             font-size: 1rem;
             transition: transform 0.3s;
+            width: 100%;
         }
 
         .btn:hover {
@@ -319,7 +420,6 @@
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-top: 2rem;
             animation: fadeIn 0.5s;
             animation-delay: 0.2s;
         }
@@ -351,6 +451,10 @@
                 padding: 0.3rem 0.6rem;
                 font-size: 0.9rem;
             }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -360,6 +464,7 @@
         <li><a href="#" class="nav-link active" data-page="home">Accueil</a></li>
         <li><a href="#" class="nav-link" data-page="about">À propos</a></li>
         <li><a href="#" class="nav-link" data-page="projects">Projets</a></li>
+        <li><a href="#" class="nav-link" data-page="certifications">Certifications</a></li>
         <li><a href="#" class="nav-link" data-page="veille">Veille Technologique</a></li>
         <li><a href="#" class="nav-link" data-page="stage">Stage</a></li>
         <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
@@ -428,6 +533,22 @@
                 <h3>Projet 3 - -</h3>
                 <p>-</p>
                 <p><strong>Technologies :</strong> -</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Certifications -->
+    <section id="certifications" class="page-section">
+        <h2>Mes Certifications</h2>
+        
+        <div class="certifications-grid">
+            <div class="certification-card">
+                <div class="cert-icon">📜</div>
+                <h3>Certification Pix</h3>
+                <p class="cert-organisme">Éducation Nationale</p>
+                <p class="cert-info">Score : 428/895</p>
+                <p class="cert-info">Niveau : Indépendant 2</p>
+                <a href="certification-pix.pdf" target="_blank" class="cert-btn">Consulter</a>
             </div>
         </div>
     </section>
@@ -509,37 +630,39 @@
     <!-- Page Contact -->
     <section id="contact" class="page-section">
         <h2>Contactez-moi</h2>
+        
+        <div class="contact-container">
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Nom complet</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
 
-        <form class="contact-form" onsubmit="handleSubmit(event)">
-            <div class="form-group">
-                <label for="name">Nom complet</label>
-                <input type="text" id="name" name="name" required>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+
+                <button type="submit" class="btn">Envoyer le message</button>
+            </form>
+
+            <div class="contact-info">
+                <h3>Informations de contact</h3>
+                <p><strong>Email :</strong> serrano.abdallah@gmail.com</p>
+                <p><strong>Téléphone :</strong> +33 6 95 19 17 73</p>
+                <p><strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/abdallah-serrano-679495160/" target="_blank">Linkedin.Abdallah-Serrano</a></p>
+                <p><strong>GitLab :</strong> <a href="https://gitlab.com/serrano.abdallah/SERRANO" target="_blank">GitLab.Abdallah-Serrano</a></p>
             </div>
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="subject">Sujet</label>
-                <input type="text" id="subject" name="subject" required>
-            </div>
-
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
-
-            <button type="submit" class="btn">Envoyer le message</button>
-        </form>
-
-        <div class="contact-info">
-            <h3> Informations de contact</h3>
-            <p><strong> Email :</strong> serrano.abdallah@gmail.com</p>
-            <p><strong> Téléphone :</strong> +33 6 95 19 17 73</p>
-            <p><strong> LinkedIn :</strong> <a href="https://www.linkedin.com/in/abdallah-serrano-679495160/" target="_blank">Linkedin.Abdallah-Serrano</a></p>
-            <p><strong> GitLab :</strong> <a href="https://gitlab.com/serrano.abdallah/SERRANO" target="_blank">GitLab.Abdallah-Serrano</a></p>
         </div>
     </section>
 </div>
