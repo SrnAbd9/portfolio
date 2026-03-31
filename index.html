@@ -448,6 +448,23 @@
             text-decoration: underline;
         }
 
+        .contact-link {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s;
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            transform: scale(1.05);
+            text-decoration: none !important;
+        }
+
         /* Footer */
         footer {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -867,7 +884,8 @@
         <div class="mentions-content">
             <h3>Propriétaire du site</h3>
             <p><strong>Nom :</strong> Abdallah SERRANO</p>
-            <p><strong>Email :</strong> serrano.abdallah@gmail.com</p>
+            <p><strong>Email :</strong> <a href="mailto:serrano.abdallah@gmail.com">serrano.abdallah@gmail.com</a></p>
+            <p><a href="#" class="contact-link" data-page="contact">→ Me contacter</a></p>
             
             <h3>Hébergement</h3>
             <p><strong>Hébergeur :</strong> GitHub Pages</p>
@@ -930,6 +948,29 @@
             
             const pageId = link.getAttribute('data-page');
             document.getElementById(pageId).classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+
+    // Navigation depuis mentions légales vers contact
+    const contactLinks = document.querySelectorAll('.contact-link');
+    contactLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            navLinks.forEach(l => l.classList.remove('active'));
+            sections.forEach(section => section.classList.remove('active'));
+            
+            const pageId = link.getAttribute('data-page');
+            document.getElementById(pageId).classList.add('active');
+            
+            // Active le lien Contact dans la nav
+            navLinks.forEach(l => {
+                if (l.getAttribute('data-page') === 'contact') {
+                    l.classList.add('active');
+                }
+            });
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
